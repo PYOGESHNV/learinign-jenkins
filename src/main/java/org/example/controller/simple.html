@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login API Example</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 50px; }
+        label, input, button { display: block; margin-top: 15px; }
+        input { padding: 8px; width: 250px; }
+        button { padding: 10px 15px; margin-top: 20px; }
+        #output { margin-top: 20px; color: green; white-space: pre-line; }
+    </style>
+</head>
+<body>
+
+<h1>Login API Example</h1>
+<form id="loginForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" placeholder="Enter username" autocomplete="username">
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" placeholder="Enter password" autocomplete="current-password">
+
+    <button type="submit">Login</button>
+</form>
+
+<div id="output"></div>
+
+<script>
+    const form = document.getElementById('loginForm');
+    const output = document.getElementById('output');
+
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault(); // prevent page reload
+
+        const username = form.username.value;
+        const password = form.password.value;
+
+        const url = `https://lastsmalapi.onrender.com/api/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+
+        try {
+            const response = await fetch(url, { method: 'GET' });
+            const data = await response.json();
+            output.textContent = `API Response:\n${JSON.stringify(data, null, 2)}`;
+            window.location.href = `dashboard.html?username=${encodeURIComponent(username)}`;
+        } catch (error) {
+            output.textContent = `Error: ${error}`;
+        }
+    });
+</script>
+
+</body>
+</html>

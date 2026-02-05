@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 50px; }
+        h1 { color: green; }
+    </style>
+</head>
+<body>
+
+<h1>Welcome to Dashboard</h1>
+<p id="welcomeMessage"></p>
+
+<script>
+    // Get username from query parameter
+    const params = new URLSearchParams(window.location.search);
+    const username = params.get('username') || 'Guest';
+
+    document.getElementById('welcomeMessage').textContent = `Hello, ${username}! You are logged in.`;
+</script>
+
+</body>
+</html>
